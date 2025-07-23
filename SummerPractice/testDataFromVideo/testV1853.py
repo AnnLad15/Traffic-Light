@@ -42,7 +42,7 @@ class TrafficLightAnalyzer:
     def load_data(self, filename):
         with open(filename, 'r', encoding='utf-8') as file:
             reader = csv.reader(file)
-            for _ in range(3):
+            for _ in range(2):
                 next(reader)
 
             for row in reader:
@@ -122,8 +122,8 @@ class TrafficLightAnalyzer:
 
         # Отображение исходных точек
         for camera, observations in color_map['data'].items():
-            cam_times = [obs[0] for obs in observations] # Извлекаем временные метки
-            cam_colors = [obs[1] for obs in observations] # Извлекаем цвета
+            cam_times = [obs[0] for obs in observations]
+            cam_colors = [obs[1] for obs in observations]
             plt.scatter(cam_times, cam_colors, alpha=0.3, label=f'Камера {camera} (raw)', s=30)
 
 
@@ -166,10 +166,8 @@ class TrafficLightAnalyzer:
         print("\nУсредненная последовательность:")
         print("Время         | Основной | Левая | Правая")
         print("------------------------------------------")
-        # вывод в числах
         for t, m, l, r in zip(times, main_colors, left_colors, right_colors):
-            print(f"{t:.1f} | {m:>8} | {l:>5} | {r:>5}")
-            #print(f"{t:.1f} | {self.color_names[m]:<8} | {self.color_names[l]:<5} | {self.color_names[r]}") вывод словами
+            print(f"{t:.1f} | {self.color_names[m]:<8} | {self.color_names[l]:<5} | {self.color_names[r]}")
 
         # Настройки графиков для каждой секции
         main_settings = {
@@ -201,10 +199,10 @@ class TrafficLightAnalyzer:
 
 if __name__ == "__main__":
     analyzer = TrafficLightAnalyzer(delta_t=1.0, confidence_threshold=70.0)
-    analyzer.load_data('classified_tls.csv')
+    analyzer.load_data('data_v1853.csv')
 
     analyzer.analyze_time_range(
-        start_unix=1720612825.0,
-        end_unix=1720612940.0,
+        start_unix=0.0,
+        end_unix=61.0,
         step_sec=0.5
     )

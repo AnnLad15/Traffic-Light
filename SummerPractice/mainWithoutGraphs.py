@@ -1,8 +1,5 @@
 import csv
 from collections import defaultdict
-import matplotlib.pyplot as plt
-from datetime import datetime
-
 
 class TrafficLightAnalyzer:
     def __init__(self, delta_t=5.0, confidence_threshold=70.0):
@@ -117,36 +114,6 @@ class TrafficLightAnalyzer:
 
         return max(color_scores.items(), key=lambda x: x[1])[0]
 
-    def plot_single_signal(self, times, colors, color_map, title, ylabel):
-        plt.figure(figsize=(9, 5))
-
-        # Отображение исходных точек
-        for camera, observations in color_map['data'].items():
-            cam_times = [obs[0] for obs in observations] # Извлекаем временные метки
-            cam_colors = [obs[1] for obs in observations] # Извлекаем цвета
-            plt.scatter(cam_times, cam_colors, alpha=0.3, label=f'Камера {camera} (raw)', s=30)
-
-
-        # Сглаженная линия
-        plt.plot(times, colors, 'k-', linewidth=2, label='Сглаженный сигнал')
-
-        # Настройки графика
-        plt.yticks(list(color_map['ticks'].keys()),
-                   list(color_map['ticks'].values()))
-        plt.xlabel('Время (Unix)')
-        plt.ylabel(ylabel)
-        plt.title(title)
-
-        #plt.legend()
-
-        # Убираем дубликаты в легенде
-        handles, labels = plt.gca().get_legend_handles_labels()
-        by_label = dict(zip(labels, handles))
-        plt.legend(by_label.values(), by_label.keys())
-
-        plt.grid(True, linestyle='--', alpha=0.5)
-        plt.tight_layout()
-        plt.show()
 
     def analyze_time_range(self, start_unix, end_unix, step_sec=1.0):
         times = []
@@ -166,37 +133,13 @@ class TrafficLightAnalyzer:
         print("\nУсредненная последовательность:")
         print("Время         | Основной | Левая | Правая")
         print("------------------------------------------")
-        # вывод в числах
+        #вывод в числах
         for t, m, l, r in zip(times, main_colors, left_colors, right_colors):
             print(f"{t:.1f} | {m:>8} | {l:>5} | {r:>5}")
-            #print(f"{t:.1f} | {self.color_names[m]:<8} | {self.color_names[l]:<5} | {self.color_names[r]}") вывод словами
 
-        # Настройки графиков для каждой секции
-        main_settings = {
-            'data': self.data_main,
-            'ticks': {0: 'Не опр.', 1: 'Красный', 2: 'Зеленый', 3: 'Желтый', 6: 'Вперед', 7: 'Назад'},
-            'title': f'Основной сигнал светофора (окно: {self.delta_t} сек)',
-            'ylabel': 'Цвет'
-        }
-
-        left_settings = {
-            'data': self.data_left,
-            'ticks': {0: 'Не опр.', 1: 'Красный', 2: 'Зеленый', 4: 'Зел.стрелка влево', 6: 'Вперед', 7: 'Назад'},
-            'title': 'Левая секция светофора',
-            'ylabel': 'Состояние'
-        }
-
-        right_settings = {
-            'data': self.data_right,
-            'ticks': {0: 'Не опр.', 1: 'Красный',2: 'Зеленый', 5: 'Зел.стрелка вправо', 6: 'Вперед', 7: 'Назад'},
-            'title': 'Правая секция светофора',
-            'ylabel': 'Состояние'
-        }
-
-        # Построение отдельных графиков
-        self.plot_single_signal(times, main_colors, main_settings, main_settings['title'], main_settings['ylabel'])
-        self.plot_single_signal(times, left_colors, left_settings, left_settings['title'], left_settings['ylabel'])
-        self.plot_single_signal(times, right_colors, right_settings, right_settings['title'], right_settings['ylabel'])
+        #вывод в словах
+        #for t, m, l, r in zip(times, main_colors, left_colors, right_colors):
+        #    print(f"{t:.1f} | {self.color_names[m]:<8} | {self.color_names[l]:<5} | {self.color_names[r]}")
 
 
 if __name__ == "__main__":
