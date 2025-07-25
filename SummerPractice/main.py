@@ -178,13 +178,20 @@ class TrafficLightAnalyzer:
 
     def print_result(self):
         # Вывод результатов
-        print("\nУсредненная последовательность:")
-        print("Время         | Основной | Левая | Правая")
+        print("\nAverage sequence:")
+        print("Time          | Main  | Left | Right")
         print("------------------------------------------")
         # вывод в числах
         for t, m, l, r in zip(self.times, self.main_colors, self.left_colors, self.right_colors):
             print(f"{t:.1f} | {m:>8} | {l:>5} | {r:>5}")
             # print(f"{t:.1f} | {self.color_names[m]:<8} | {self.color_names[l]:<5} | {self.color_names[r]}") вывод словами
+
+    def print_result_csv(self):
+        # Вывод результатов
+        print("Time,Main,Left,Right")
+        for t, m, l, r in zip(self.times, self.main_colors, self.left_colors, self.right_colors):
+            print(f"{t:.1f},{m},{l},{r}")
+
 
     def plot_graphs(self):
         # Настройки графиков для каждой секции
@@ -220,10 +227,12 @@ class TrafficLightAnalyzer:
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: main.py file.csv [--plot] [--noprint]")
+        print("Usage: main.py file.csv [--plot] [--print_csv | --print_human | --noprint]")
         print("file.csv: traffic light data")
         print("Options:")
         print("--plot: draw graphs")
+        print("--print_csv: print results in csv format")
+        print("--print_human: print results in human readable table (default)")
         print("--noprint: don't print results")
         sys.exit()
     analyzer = TrafficLightAnalyzer(delta_t=1.0, confidence_threshold=70.0)
@@ -237,7 +246,11 @@ if __name__ == "__main__":
     try:
         sys.argv.index('--noprint')
     except ValueError as e:
-        analyzer.print_result()
+        try:
+            sys.argv.index('--print_csv')
+            analyzer.print_result_csv()
+        except ValueError as e:
+            analyzer.print_result()
 
     try:
         sys.argv.index('--plot')
