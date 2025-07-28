@@ -2,7 +2,6 @@ import csv
 import sys
 from collections import defaultdict
 import matplotlib.pyplot as plt
-from datetime import datetime
 
 
 class TrafficLightAnalyzer:
