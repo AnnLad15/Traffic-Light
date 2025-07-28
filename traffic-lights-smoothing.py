@@ -226,7 +226,7 @@ class TrafficLightAnalyzer:
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: main.py file.csv [--plot] [--print_csv | --print_human | --noprint]")
+        print("Usage: traffic-lights-smoothing.py file.csv [--plot] [--print_csv | --print_human | --noprint]")
         print("file.csv: traffic light data")
         print("Options:")
         print("--plot: draw graphs")

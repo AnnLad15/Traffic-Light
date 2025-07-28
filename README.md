@@ -30,6 +30,40 @@
 в течение короткого времени сигнала мы всё равно какое-то время "помним"
 предыдущее значение.
 
+--- 
+# Support
+
+**Python 3.9.13**
+
+---
+# Install
+
+**Описание зависимостей:**
+
+import matplotlib.pyplot as plt - библиотека для визуализации данных. Позволяет строить графики (линейные, столбчатые, круговые и др.).
+
+**Pip**
+```bash
+pip install matplotlib
+```
+
+---
+
+# Usage
+
+Usage: main.py file.csv [--plot] [--print_csv | --print_human | --noprint]
+
+file.csv: traffic light data (файл с данными, например classified_tls.csv)
+
+**Options:**
+
+* --plot: draw graphs (рисует графики)
+
+* --print_csv: print results in csv format (выводит результат в формате csv)
+
+* -print_human: print results in human readable table (default) (выводит результат в формате удобный для чтения человеком (по умолчанию))
+
+* --noprint: don't print results  (не выводит результат)
 
 ---
 
@@ -69,45 +103,12 @@
 2. Нет точной обработки мигающих сигналов светофора (status 9) в связи с отсутствием данных 
 
 ---
-# Support
 
-**Python 3.9**
 
---- 
 
-# Install
-
-**Описание зависимостей:**
-
-import matplotlib.pyplot as plt - библиотека для визуализации данных. Позволяет строить графики (линейные, столбчатые, круговые и др.).
-
-**Pip**
-```bash
-pip install matplotlib
-```
-
----
-
-# Usage
-
-Usage: main.py file.csv [--plot] [--print_csv | --print_human | --noprint]
-
-file.csv: traffic light data (файл с данными, например classified_tls.csv)
-
-**Options:**
-
-* --plot: draw graphs (рисует графики)
-
-* --print_csv: print results in csv format (выводит результат в формате csv)
-
-* -print_human: print results in human readable table (default) (выводит результат в формате удобный для чтения человеком (по умолчанию))
-
-* --noprint: don't print results  (не выводит результат)
-
----
 
 # Входные данные
- См. в файле classified_tls.csv
+ См. в файле SampleData\classified_tls.csv
 
 # Выходные данные
 Пример вывода в формате csv (--print_csv)
