@@ -36,34 +36,22 @@
 **Python 3.9.13**
 
 ---
-# Install
-
-**Описание зависимостей:**
-
-import matplotlib.pyplot as plt - библиотека для визуализации данных. Позволяет строить графики (линейные, столбчатые, круговые и др.).
-
-**Pip**
-```bash
-pip install matplotlib
-```
-
----
 
 # Usage
 
-Usage: main.py file.csv [--plot] [--print_csv | --print_human | --noprint]
+Usage: traffic-lights-smoothing.py file.csv [--plot] [--print_csv | --print_human | --noprint]
 
 file.csv: traffic light data (файл с данными, например classified_tls.csv)
 
 **Options:**
 
-* --plot: draw graphs (рисует графики)
+* --plot: рисует графики
 
-* --print_csv: print results in csv format (выводит результат в формате csv)
+* --print_csv: выводит результат в формате csv
 
-* -print_human: print results in human readable table (default) (выводит результат в формате удобный для чтения человеком (по умолчанию))
+* -print_human: выводит результат в формате удобный для чтения человеком (по умолчанию)
 
-* --noprint: don't print results  (не выводит результат)
+* --noprint: не выводит результат
 
 ---
 
